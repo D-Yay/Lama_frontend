@@ -11,7 +11,7 @@ export function TextInputAndOutput(){
     const payload = {'user_question' : prompt}
     
     //fetch code
-    const response = await fetch('http://127.0.0.1:8000/prompt', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_RENDER_API_URL}/prompt`, {
       method: "POST",
       headers: {'Content-type' : 'application/json'}, //mandatory metadata to get Pydantic to read the JSON properly
       body: JSON.stringify(payload) //turn the variable into a string and transmit safely as JSON
