@@ -10,6 +10,9 @@ export function TextInputAndOutput(){
   async function communicateWithBackend() {
     const payload = {'user_question' : prompt}
     
+    //error diagnosis before fetch
+    console.log("URL is:", process.env.NEXT_PUBLIC_RENDER_API_URL)
+
     //fetch code
     const response = await fetch(`${process.env.NEXT_PUBLIC_RENDER_API_URL}/prompt`, {
       method: "POST",
