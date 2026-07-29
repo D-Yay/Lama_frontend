@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { AIChatBlock } from "@/components/ai-chat-interface"
 
 
 export function TextInputAndOutput(){
@@ -10,9 +11,6 @@ export function TextInputAndOutput(){
   async function communicateWithBackend() {
     const payload = {'user_question' : prompt}
     
-    //error diagnosis before fetch
-    console.log("URL is:", process.env.NEXT_PUBLIC_RENDER_API_URL)
-
     //fetch code
     const response = await fetch(`${process.env.NEXT_PUBLIC_RENDER_API_URL}/prompt`, {
       method: "POST",
@@ -29,29 +27,9 @@ export function TextInputAndOutput(){
   //html UI display on page
   return(
     <div>
-      <input
-      //this is the tag that creates a typing field
-        type = 'text'
-        placeholder = 'Ask the AI something bout the context'
-        //the faded text in the box that dissapear when user type sumthin
-        value = {prompt}
-        //the displayed value
-        onChange={(typedCharacter) => setPrompt(typedCharacter.target.value)}
-        //what inside () is the recorded input, we name the variable typedCharacter
-        //So the typed character is stored in the variable typedCharacter
-        //typedCharacter.target is the input box itself
-        //.value is the value of the input box
-
-        />
-      <button onClick={() => communicateWithBackend()}>
-        Send prompt to AI
-      </button>
-
-      <p>
-        AI answer: {llmResponse}
-      </p>
-
+      <AIChatBlock/>
     </div>
+    
   );
 
 }
